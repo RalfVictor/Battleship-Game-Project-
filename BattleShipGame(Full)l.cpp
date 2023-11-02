@@ -267,6 +267,89 @@ class Level3:public Battleship{
 	}	
 };
 
+class Level4:public Battleship{
+	private:
+		char Matrix[7][7]=
+						  {{'1','1','1','1','1','0','0'},
+						   {'0','0','0','0','1','0','1'},
+						   {'1','0','0','1','0','0','1'},
+						   {'1','0','1','0','0','0','1'},
+						   {'1','1','0','0','0','0','1'},
+						   {'1','0','0','0','0','0','1'},
+						   {'0','1','1','1','1','1','0'}};
+		char Matrixgame[7][7]=
+						  {{' ',' ',' ',' ',' ',' ',' '},
+						   {' ',' ',' ',' ',' ',' ',' '},
+						   {' ',' ',' ',' ',' ',' ',' '},
+						   {' ',' ',' ',' ',' ',' ',' '},
+						   {' ',' ',' ',' ',' ',' ',' '},
+						   {' ',' ',' ',' ',' ',' ',' '},
+						   {' ',' ',' ',' ',' ',' ',' '}};
+	public:
+		Level4():Battleship(23,30){
+		}	
+	void display(){
+		cout<<"Attempt - "<<getcurrentattempt()+1<<"         "<<"Total Attempts - "<<gettotattempt()<<endl;
+		cout<<"  COL ";
+		for(int i=0;i<7;i++){
+			cout<<" "<<i+1<<"  ";
+		}
+		cout<<endl<<"ROW  ";
+		for(int j=0;j<7;j++){
+				cout<<" ---";
+			}cout<<endl;
+		for(int i=0;i<7;i++){
+			cout<<"   "<<i+1<<" |";
+			for(int j=0;j<7;j++){
+				cout<<" "<<Matrixgame[i][j]<<" |";
+			}cout<<endl<<"     ";
+			for(int j=0;j<7;j++){
+				if(i<6){
+				cout<<"|---";
+				}
+				else{
+					cout<<" ---";
+				}
+				
+			}if(i<6){
+				cout<<"|"<<endl;
+				}
+				else{
+					cout<<endl;
+				}
+		}
+	}
+	char updatematrix(){
+		Invalidlev4:
+		int row,col;
+		cout<<"Give Value of Row:";
+		cin>>row;
+		cout<<"Give Value of Column:";
+		cin>>col;
+		if(row>7 || row<1 || col>7 || col<1){
+			cout<<"Invalid Row or Column Input."<<endl;
+			Sleep(500);
+			system("cls");
+			display();
+			goto Invalidlev4;
+		}
+		else{Matrixgame[row-1][col-1]=Matrix[row-1][col-1];
+		updateattempt();
+		if(Matrixgame[row-1][col-1]=='1'){
+			PlaySound("C:\\mrinank\\Learning C\\Battleship\\hit.wav",NULL,SND_ASYNC);
+			cout<<"You Scored a Hit!!"<<endl;
+		}
+		else{
+			PlaySound("C:\\Users\\mrina\\Downloads\\miss.wav",NULL,SND_ASYNC);
+			cout<<"You Missed!!"<<endl;
+		}
+		Sleep(1000);
+		system("cls");
+		return Matrixgame[row-1][col-1];
+	}
+	}	
+};
+
 int StartMenu(){
 	int MenuCom;
 	cout<<"----------------BattleShip-----------------"<<endl;
@@ -284,6 +367,7 @@ int LevelSelect(){
 		<<"              Level 1 (4x4)"<<endl
 		<<"              Level 2 (5x5)"<<endl
 		<<"              Level 3 (6x6)"<<endl
+		<<"              Level 4 (7x7)"<<endl
 		<<"          Press 0 to Go to Main Menu."
 		<<"\n\n"<<"Give Level No:";
 	cin>>LevelCom;
@@ -313,25 +397,25 @@ void Secret(){
 	PlaySound("C:\\Users\\mrina\\Downloads\\we-live-we-love-we-lie.wav",NULL,SND_ASYNC);
 	Sleep(1500);
 	cout<<"\n\n\n\n\n\n\n\n"                                                                                  
-          "   .   ..   ..    .....           .       .     .     .    .....                \n"
+          "   .   ..   ..    .....           .       .     .     .    .....              \n"
           "  -@=  @@-  @+    @%++=          @      .@   .@#   %%    %@+++                \n" 
           "   #@ +%#% =@.    @%==.          @      .@    =@- =@.    %@==:                \n"
           "   :@=@-:@=@+     @#..           @      .@     #@:@=     %%...                \n"
-          "    @%  #@@      @%+          *@##   .@+     .@@#      %@*                \n";                                                                              
+          "    @%   #@@      @%+            *@##   .@+     .@@#      %@*                 \n";                                                                              
        Sleep(1000);
        system("cls");
        cout<<"\n\n\n\n\n\n\n\n"                                                                                                                                                                   
-            ":+   +=   +:   :++++.         :+        -+++-     +:   -=    ++++-            \n"           
+            ":+   +=   +:   :++++.         :+        -+++-     +:   -=    ++++-          \n"           
             ".@+ =@@- +@    =@-..          =@:     .@. :%%    *@. .@=    @..             \n"            
-            " @ %+#% @=    =@#+          =@:     =@:   @.    @ ##     @%**.            \n"           
-            " .@#@ :@#@     =@-..          =@-..   :@. :@#     -@@.     @*..             \n"            
-            "  -+-  =+:     :++++.         :++++    .=+++:       =+-      ++++-            \n";           
+            " @ %+#% @=     =@#+           =@:     =@:   @.     @ ##     @%**.           \n"           
+            " .@#@ :@#@     =@-..          =@-..   :@. :@#      -@@.     @*..            \n"            
+            "  -+-  =+:     :++++.         :++++    .=+++:       =+-      ++++-           \n";           
     	Sleep(1000);
        	system("cls");
 		   cout<<"\n\n\n\n\n\n\n\n"                                                                        
                 ":-   :-.  .-.    -----           --       --     -----                    \n"                    
                 ":@+  %@#  *@    .@#---           @@       %@     @%---                    \n"                   
-                " #@ =@+@-.@=    .@%*-           @@       %@     @@*=                    \n"                    
+                " #@ =@+@-.@=    .@%*-            @@       %@     @@*=                    \n"                    
                 " :@+@+ %%+%     .@*              @@       %@     @%                       \n"                      
                 "  #@@. -@@=     .@%##*           %@##*    %@     @@###.                   \n"    ; 
 		Sleep(500);
@@ -347,11 +431,11 @@ void Secret(){
           "                      .:----------------------------:.\n"                          
           "                    .:---------------------------------.\n"                        
           "                 .:-------====+++++++**++++++++====------.\n"                      
-          "                --===++*#####%%%%%%%%%%%%%%%%%##%###*++-.                  *  -#:    -###+.    .#-   #+       *  .##   #-    #+    -#*.  #=     @%\n"                    
-          "              .-=+#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%##=                 :@:@=    =@=  .%@    .@+   @       =@- @@= +@.    @    =@#@: @+     %%\n"                   
-          "             .+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%##-                 :@@=     #@    +@:   .@+   @        %#.@-#% @+     @*    =@.*@:@+     %#\n"                  
-          "             :#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%#:                  #@      =@..-@#     @%:.=@=        -@%% :@#@      @*    =@  +@@+     ++\n"                  
-          "              +#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@%%##*+-                    -+       .=++=:       =++=:          =+:  =+-      +-    :+   -+:     ==\n"                    
+          "                --===++*#####%%%%%%%%%%%%%%%%%##%###*++-.                  *  -#:    -###+.     .#-   #+       *  .##   #-    #+    -#*.  #=     @%\n"                    
+          "              .-=+#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%##=                :@:@=    =@=  .%@    .@+   @        =@- @@= +@.    @     =@#@: @+     %%\n"                   
+          "             .+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%##-              :@@=     #@    +@:   .@+   @        %#.@-#% @+     @*    =@.*@:@+     %#\n"                  
+          "             :#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%#:               #@       =@..-@#     @%:.=@=       -@%% :@#@      @*    =@  +@@+     ++\n"                  
+          "              +#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@%%##*+-                -+       .=++=:       =++=:         =+:  =+-      +-    :+   -+:     ==\n"                    
           "               :+#%@@@@@@@@@@@@@@@@@@@@@@@@@%####%@@@*:.\n"                        
           "                 .##%%@@%%%%%%%%%%@@%%%%%%%%==+#%%*.\n"                          
           "            .     .=*#%%%%%%%%%%%%%###+##*=--=+-\n"                            
@@ -381,7 +465,7 @@ void Secret(){
 }
 int main(){
 	int LevelNo;
-	int le1,le2,le3;
+	int le1,le2,le3,le4;
 	Start:
 	int MenuOut=StartMenu();
 	if(MenuOut==1){
@@ -411,7 +495,7 @@ int main(){
 			}
 			else{cout<<"You Win"<<endl;
 			le1=1;
-				if(le1==1&&le2==1&&le3==1){
+				if(le1==1&&le2==1&&le3==1&&le4==1){
 			goto secretending;
 			}
 			else{
@@ -463,7 +547,7 @@ int main(){
 			}
 			else{cout<<"You Win"<<endl;
 			le2=1;
-				if(le1==1&&le2==1&&le3==1){
+				if(le1==1&&le2==1&&le3==1&&le4==1){
 			goto secretending;
 			}
 			else{
@@ -515,7 +599,7 @@ int main(){
 			}
 			else{cout<<"You Win"<<endl;
 			le3=1;
-				if(le1==1&&le2==1&&le3==1){
+				if(le1==1&&le2==1&&le3==1&&le4==1){
 			goto secretending;
 			}
 			else{
@@ -545,6 +629,60 @@ int main(){
 				Sleep(500);
 				system("cls");
 				goto commandprompt3;
+			}
+			else if(command==0){
+				goto Exit;
+			}
+			break;
+			}
+		case 4:{
+			Level4Re:
+			Level4 lev4;
+			int coun = 0;
+			int Oricoun = lev4.getcount();
+			Level4con:
+			lev4.display();
+			
+			if(lev4.getcurrentattempt()<lev4.gettotattempt()){
+			if(coun<Oricoun){
+				char Obtained = lev4.updatematrix();
+				if(Obtained=='1'){
+					coun++;
+				}
+				goto Level4con;
+			}
+			else{cout<<"You Win"<<endl;
+			le4=1;
+				if(le1==1&&le2==1&&le3==1&&le4==1){
+			goto secretending;
+			}
+			else{
+				goto commandprompt4;
+			}
+			}
+			}
+			else{
+				cout<<"Try Again."<<endl;
+			}
+			commandprompt4:
+			int command;
+			cout<<"If You Want to Continue(1)  OR  To Exit(0)  OR  Try again (2)"<<endl;
+			cin>>command;
+			if(command==1){
+				Sleep(500);
+				system("cls");
+				goto Start;
+			}
+			else if(command==2){
+				Sleep(500);
+				system("cls");
+				goto Level4Re;
+			}
+			else if(command!=0){
+				cout<<"Invalid Command. Try Again"<<endl;
+				Sleep(500);
+				system("cls");
+				goto commandprompt4;
 			}
 			else if(command==0){
 				goto Exit;
