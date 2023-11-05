@@ -1,2 +1,2 @@
 # Battleship-Game-Project-
-C++ Project
+C++ Project for OOPS project
