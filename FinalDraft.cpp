@@ -13,16 +13,16 @@ void black(){
 	SetConsoleTextAttribute(hConsole, 0 | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); 
 }
 void bgmmusic(){
-		PlaySound("C:\\Users\\Ralf Victor\\Documents\\C\\Battleship\\Puzzle-Dreams-3.wav",NULL,SND_ASYNC| SND_LOOP);
+		PlaySound("Puzzle-Dreams-3.wav",NULL,SND_ASYNC| SND_LOOP);
 }
 void hit(){
-	PlaySound("C:\\Users\\Ralf Victor\\Documents\\C\\Battleship\\hit.wav",NULL,SND_ASYNC);
+	PlaySound("hit.wav",NULL,SND_ASYNC); //add your own directory for the files
 }
 void miss(){
-	PlaySound("C:\\Users\\Ralf Victor\\Documents\\C\\Battleship\\miss.wav",NULL,SND_ASYNC);
+	PlaySound("miss.wav",NULL,SND_ASYNC);//add your own directory for the files
 }
 void error(){
-	PlaySound("C:\\Users\\Ralf Victor\\Documents\\C\\Battleship\\erro.wav",NULL,SND_ASYNC);
+	PlaySound("erro.wav",NULL,SND_ASYNC);//add your own directory for the files
 }
 
 class Battleship{
@@ -491,7 +491,7 @@ void ExitScreen(){
 }
 
 void Secret(){
-	PlaySound("we-live-we-love-we-lie.wav",NULL,SND_ASYNC);
+	PlaySound("we-live-we-love-we-lie.wav",NULL,SND_ASYNC);//add your own directory for the files
 	Sleep(1500);
 	cout<<"                                                                                                                                                                 \n"
  "                                                                                                                                                                          \n"  
